@@ -1,0 +1,18 @@
+{
+	"name": "altvserver",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "",
+	"license": "ISC",
+	"type": "module",
+	"devDependencies": {
+		"@altv/types-client": "^1.7.6",
+		"@altv/types-natives": "^1.4.2",
+		"@altv/types-server": "^1.9.7",
+		"@altv/types-webview": "^1.0.2"
+	}
+}
