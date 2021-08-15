@@ -33,5 +33,4 @@ jobs:
             cd /home/gta/ms13-gta
             git pull origin main
             git status
-            screen -XS gta quit
             screen -dmS gta ./altv-server
