@@ -507,6 +507,32 @@ alt.on("playerDeath", (player, killer, weapon) => {
   }
 });
 
+alt.on('weaponDamage', (attacker, victim, weaponHash, damage, offset, bodyPart) => {
+    
+    chat.broadcast(`weaponDamage Bodypart: ${bodyPart}`);
+    if (bodyPart === 20) {
+        // return false; // Prevent Headshots
+    }
+    
+    chat.broadcast(`weaponDamage Old Damage: ${damage}`);
+    damage = damage * 0.1;
+    // 20 = headshot
+    
+    try {
+        chat.broadcast(`Bodypart test: ${alt.BodyParty.Head}`);
+    } catch (e) {
+    }
+    
+    try {
+        chat.broadcast(`Bodypart test: ${BodyParty.Head}`);
+    } catch (e) {
+    }
+    
+    chat.broadcast(`weaponDamage new Damage: ${damage}`);
+    
+    // Anything that is not a battle axe does damage.
+});
+
 function getDistanceBetweenPoints(pos1, pos2) {
   const dX = pos1.x - pos2.x;
   const dY = pos1.y - pos2.y;
