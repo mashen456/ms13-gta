@@ -1,0 +1,34 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Deployment Workflow
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+
+
+  # Allows you to run this workflow manually from the Actions tab
+  # workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  job_one:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: testing ms13-gw server ssh connection
+        uses: appleboy/ssh-action@master
+        with:
+          host: 95.216.221.65
+          username: root
+          key: ${{ secrets.MS13_SECRET }}
+          port: 22
+          script: | 
+            cd /home/gta/ms13-gta
+            git pull origin main
+            git status
