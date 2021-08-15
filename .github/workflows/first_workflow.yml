@@ -29,6 +29,7 @@ jobs:
           key: ${{ secrets.MS13_SECRET }}
           port: 22
           script: | 
+            su gta
             cd /home/gta/ms13-gta
             git pull origin main
             git status
