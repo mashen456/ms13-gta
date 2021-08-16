@@ -75,11 +75,7 @@ const clothes = {
   //blue
   vagos: {
 
-    //hat
-    0:{
-      drawable: 20,
-      texture: 4,
-    },
+
     //Blue Blagueurs Face Bandana
     1: {
       drawable: 111,
