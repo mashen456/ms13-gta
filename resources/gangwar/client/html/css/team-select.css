@@ -48,11 +48,11 @@
 }
 
 .team-select-item.ballas:hover {
-  background: rgba(196, 0, 171, 0.6);
+  background: rgba(96, 96, 96, 0.6);
 }
 
 .team-select-item.vagos:hover {
-  background: rgba(255, 191, 0, 0.6);
+  background: rgba(49, 49, 148, 0.6);
 }
 
 .team-select-item span {

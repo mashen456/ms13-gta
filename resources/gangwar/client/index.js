@@ -83,7 +83,7 @@ const clothes = {
     },
     //hair
     2: {
-      drawable: 74,
+      drawable: 3,
       texture: 4,
     },
     3: {
