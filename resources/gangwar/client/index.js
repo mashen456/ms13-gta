@@ -74,8 +74,6 @@ const clothes = {
   },
   //blue
   vagos: {
-
-
     //Blue Blagueurs Face Bandana
     1: {
       drawable: 111,
@@ -152,9 +150,9 @@ let lastLeadingTeam = null;
 
 const teamColors = {
   ballas: {
-    rgba: { r: 196, g: 0, b: 171, a: 150 },
-    hex: "C400AB",
-    blipColor: 83,
+    rgba: { r: 96, g: 96, b: 96, a: 150 },
+    hex: "606060",
+    blipColor: 39,
   },
   families: {
     rgba: { r: 0, g: 127, b: 0, a: 150 },
@@ -162,9 +160,9 @@ const teamColors = {
     blipColor: 52,
   },
   vagos: {
-    rgba: { r: 255, g: 191, b: 0, a: 150 },
+    rgba: { r: 49, g: 49, b: 149, a: 150 },
     hex: "FFBF00",
-    blipColor: 81,
+    blipColor: 63,
   },
 };
 
