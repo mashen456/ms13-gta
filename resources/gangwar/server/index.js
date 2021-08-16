@@ -55,7 +55,7 @@ for (let w in weapons) {
   weaponHashes[alt.hash(w)] = weapons[w];
 }
 
-const availableWeapons = ["WEAPON_KNIFE", "WEAPON_BAT", "WEAPON_BOTTLE", "WEAPON_WRENCH", "WEAPON_PISTOL", "WEAPON_HEAVYPISTOL", "WEAPON_REVOLVER", "WEAPON_MICROSMG", "WEAPON_SMG", "WEAPON_COMBATPDW", "WEAPON_ASSAULTRIFLE", "WEAPON_CARBINERIFLE", "WEAPON_PUMPSHOTGUN"];
+const availableWeapons = ["WEAPON_KNIFE",  "WEAPON_HEAVYPISTOL"];
 
 function giveWeapons(player) {
   for (const weapon of availableWeapons) {
@@ -65,16 +65,16 @@ function giveWeapons(player) {
 
 const colors = {
   ballas: {
-    rgba: { r: 196, g: 0, b: 171, a: 150 },
-    hex: "C400AB",
+    rgba: { r: 96, g: 96, b: 96, a: 150 },
+    hex: "606060",
   },
   families: {
     rgba: { r: 0, g: 127, b: 0, a: 150 },
     hex: "008000",
   },
   vagos: {
-    rgba: { r: 255, g: 191, b: 0, a: 150 },
-    hex: "FFBF00",
+    rgba: { r: 49, g: 49, b: 149, a: 150 },
+    hex: "313195",
   },
 };
 
