@@ -61,9 +61,10 @@ const clothes = {
       drawable: 7,
       texture: 1,
     },
+    //undershirt
     8: {
-      drawable: 0,
-      texture: 240,
+      drawable: 5,
+      texture: 1,
     },
     //Grayscale SN Parka
     11: {
@@ -73,6 +74,12 @@ const clothes = {
   },
   //blue
   vagos: {
+
+    //hat
+    0:{
+      drawable: 20,
+      texture: 4,
+    },
     //Blue Blagueurs Face Bandana
     1: {
       drawable: 111,
@@ -86,10 +93,10 @@ const clothes = {
       drawable: 5,
       texture: 0,
     },
-    //Blue Camo Knee Pad Cargos
+    //hose
     4: {
-      drawable: 124,
-      texture: 10,
+      drawable: 64,
+      texture: 0,
     },
     //Blue Two-Tone Sports Shoes
     6: {
@@ -100,10 +107,10 @@ const clothes = {
       drawable: 0,
       texture: 240,
     },
-    //Blue SN Parka
+    //top
     11: {
-      drawable: 314,
-      texture: 4,
+      drawable: 220,
+      texture: 10,
     },
   },
 };
