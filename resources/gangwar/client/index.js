@@ -161,7 +161,7 @@ const teamColors = {
   },
   vagos: {
     rgba: { r: 49, g: 49, b: 149, a: 150 },
-    hex: "FFBF00",
+    hex: "313195",
     blipColor: 63,
   },
 };
@@ -225,9 +225,9 @@ alt.onServer("updateTeam", (team) => {
 });
 
 const colors = {
-  ballas: "C400AB",
+  ballas: "606060",
   families: "008000",
-  vagos: "FFBF00",
+  vagos: "313195",
 };
 
 alt.onServer("applyAppearance", (team) => {
