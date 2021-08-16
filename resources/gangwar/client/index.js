@@ -84,7 +84,7 @@ const clothes = {
     //hair
     2: {
       drawable: 3,
-      texture: 4,
+      texture: 3,
     },
     3: {
       drawable: 1,
