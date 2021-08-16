@@ -81,9 +81,10 @@ const clothes = {
       drawable: 111,
       texture: 4,
     },
+    //hair
     2: {
-      drawable: 10,
-      texture: 3,
+      drawable: 74,
+      texture: 4,
     },
     3: {
       drawable: 1,
