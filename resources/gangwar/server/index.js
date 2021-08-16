@@ -604,6 +604,7 @@ alt.on("playerDeath", (player, killer, weapon) => {
       }
     }
 
+
     if (team == killerTeam && player != killer) {
       let warns = killer.getMeta("warns");
       if (warns == 2) {

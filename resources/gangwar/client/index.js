@@ -358,12 +358,7 @@ alt.onServer("updatePlayersOnline", (players) => {
   mainView.emit("updatePlayersOnline", players);
 });
 
-alt.on('weaponDamage', (attacker, victim, weaponHash, damage, offset, bodyPart) => {
-  chat.broadcast(`weaponDamage Bodypart: ${bodyPart}`);
-  if (bodyPart === 20) {
-     return false; // Prevent Headshots
-  }
-});
+
 
 function loadIpls() {
   alt.requestIpl("chop_props");
