@@ -495,8 +495,8 @@ alt.on("playerDisconnect", (player) => {
 
 alt.onClient("teamSelected", (player, teamId) => {
   let team = "families";
-  if (teamId == 2) team = "Team 1";
-  else if (teamId == 3) team = "Team 2";
+  if (teamId == 2) team = "ballas";
+  else if (teamId == 3) team = "vagos";
 
   player.setMeta("team", team);
   player.setMeta("selectingTeam", false);
