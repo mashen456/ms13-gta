@@ -12,8 +12,8 @@ const clothes = {
       texture: 5,
     },
     2: {
-      drawable: 8,
-      texture: 1,
+      drawable: 50,
+      texture: 4,
     },
     3: {
       drawable: 1,
@@ -43,12 +43,14 @@ const clothes = {
       drawable: 111,
       texture: 15,
     },
+    //hair
     2: {
-      drawable: 10,
+      drawable: 22,
       texture: 4,
     },
+    //torso
     3: {
-      drawable: 5,
+      drawable: 1,
       texture: 0,
     },
     //Gray Camo Chain Pants
@@ -84,7 +86,7 @@ const clothes = {
       texture: 3,
     },
     3: {
-      drawable: 5,
+      drawable: 1,
       texture: 0,
     },
     //hose
