@@ -36,10 +36,12 @@ const clothes = {
       texture: 6,
     },
   },
+  //gray
   ballas: {
+    //White Broker Face Bandana
     1: {
-      drawable: 51,
-      texture: 6,
+      drawable: 111,
+      texture: 15,
     },
     2: {
       drawable: 10,
@@ -71,9 +73,10 @@ const clothes = {
   },
   //blue
   vagos: {
+    //Blue Blagueurs Face Bandana
     1: {
-      drawable: 51,
-      texture: 8,
+      drawable: 111,
+      texture: 4,
     },
     2: {
       drawable: 10,
@@ -97,10 +100,10 @@ const clothes = {
       drawable: 0,
       texture: 240,
     },
-    //Blue Camo Open Parka
+    //Blue SN Parka
     11: {
-      drawable: 191,
-      texture: 10,
+      drawable: 314,
+      texture: 4,
     },
   },
 };
