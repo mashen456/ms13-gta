@@ -49,23 +49,27 @@ const clothes = {
       drawable: 5,
       texture: 0,
     },
+    //Gray Camo Chain Pants
     4: {
-      drawable: 88,
-      texture: 23,
+      drawable: 102,
+      texture: 6,
     },
+    //Ash Sports Shoes
     6: {
-      drawable: 9,
-      texture: 3,
+      drawable: 7,
+      texture: 1,
     },
     8: {
       drawable: 0,
       texture: 240,
     },
+    //Grayscale SN Parka
     11: {
-      drawable: 17,
-      texture: 3,
+      drawable: 303,
+      texture: 2,
     },
   },
+  //blue
   vagos: {
     1: {
       drawable: 51,
@@ -79,21 +83,24 @@ const clothes = {
       drawable: 5,
       texture: 0,
     },
+    //Blue Camo Knee Pad Cargos
     4: {
-      drawable: 88,
-      texture: 19,
+      drawable: 124,
+      texture: 10,
     },
+    //Blue Two-Tone Sports Shoes
     6: {
-      drawable: 9,
-      texture: 11,
+      drawable: 7,
+      texture: 4,
     },
     8: {
       drawable: 0,
       texture: 240,
     },
+    //Blue Camo Open Parka
     11: {
-      drawable: 17,
-      texture: 2,
+      drawable: 191,
+      texture: 10,
     },
   },
 };
