@@ -630,7 +630,7 @@ alt.on('weaponDamage', (attacker, victim, weaponHash, damage, offset, bodyPart) 
     
     chat.broadcast(`weaponDamage Bodypart: ${bodyPart}`);
     if (bodyPart === 20) {
-        // return false; // Prevent Headshots
+        return false; // Prevent Headshots
     }
     
     chat.broadcast(`weaponDamage Old Damage: ${damage}`);
