@@ -160,7 +160,7 @@ const teamColors = {
     blipColor: 52,
   },
   vagos: {
-    rgba: { r: 49, g: 49, b: 148, a: 150 },
+    rgba: { r: 49, g: 49, b: 149, a: 150 },
     hex: "313195",
     blipColor: 63,
   },
