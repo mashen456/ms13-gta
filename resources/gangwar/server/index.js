@@ -117,67 +117,66 @@ const vehicles = {
         "tractor2"
     ],
     families: ["police3", "police4", "sheriff2", "riot"],
-    vagos:
-        [
-            "scorcher",
-            "bati",
-            "faggio",
-            "esskey",
-            "buccaneer",
-            "chino2",
-            "clique",
-            "coquette3",
-            "dominator3",
-            "dukes",
-            "faction3",
-            "hotknife",
-            "slamvan3",
-            "stalion2",
-            "bifta",
-            "blazer",
-            "dubsta3",
-            "kalahari",
-            "dloader",
-            "sandking2",
-            "outlaw",
-            "blazer3",
-            "vagrant",
-            "baller2",
-            "baller5",
-            "asea",
-            "asea2",
-            "asterope",
-            "cog55",
-            "cog552",
-            "glendale",
-            "ingot",
-            "limo2",
-            "primo",
-            "warrener",
-            "bus",
-            "coach",
-            "rallytruck",
-            "rentalbus",
-            "trash",
-            "deveste",
-            "coquette4",
-            "ninef2",
-            "paragon2",
-            "tampa2",
-            "tornado6",
-            "t20",
-            "tezeract",
-            "vigilante",
-            "zentorno",
-            "caddy2",
-            "caddy",
-            "docktug",
-            "forklift",
-            "mower",
-            "airtug",
-            "tractor3",
-            "tractor2"
-        ],
+    vagos: [
+        "scorcher",
+        "bati",
+        "faggio",
+        "esskey",
+        "buccaneer",
+        "chino2",
+        "clique",
+        "coquette3",
+        "dominator3",
+        "dukes",
+        "faction3",
+        "hotknife",
+        "slamvan3",
+        "stalion2",
+        "bifta",
+        "blazer",
+        "dubsta3",
+        "kalahari",
+        "dloader",
+        "sandking2",
+        "outlaw",
+        "blazer3",
+        "vagrant",
+        "baller2",
+        "baller5",
+        "asea",
+        "asea2",
+        "asterope",
+        "cog55",
+        "cog552",
+        "glendale",
+        "ingot",
+        "limo2",
+        "primo",
+        "warrener",
+        "bus",
+        "coach",
+        "rallytruck",
+        "rentalbus",
+        "trash",
+        "deveste",
+        "coquette4",
+        "ninef2",
+        "paragon2",
+        "tampa2",
+        "tornado6",
+        "t20",
+        "tezeract",
+        "vigilante",
+        "zentorno",
+        "caddy2",
+        "caddy",
+        "docktug",
+        "forklift",
+        "mower",
+        "airtug",
+        "tractor3",
+        "tractor2"
+    ],
 };
 const weapons = {
     WEAPON_KNIFE: "Knife",
@@ -229,6 +228,7 @@ const positions = {
             {x: 342.3955, y: -2040.356, z: 21.5626},
             {x: 351.2835, y: -2043.2043, z: 22.0007},
         ],
+        temp_spawn: null,
         vehicle: {x: 330.9758, y: -2036.6241, z: 20.9897},
     },
     ballas: {
@@ -239,6 +239,7 @@ const positions = {
             {x: 118.9186, y: -1934.2681, z: 20.7707},
             {x: 105.7318, y: -1923.4154, z: 20.737},
         ],
+        temp_spawn: null,
         vehicle: {x: 105.7186, y: -1941.5867, z: 20.7875},
     },
     families: {
@@ -249,6 +250,7 @@ const positions = {
             {x: -191.1692, y: -1641.4813, z: 33.408},
             {x: -183.5736, y: -1587.5999, z: 34.8234},
         ],
+        temp_spawn: null,
         vehicle: {x: -183.5736, y: -1587.5999, z: 34.8234},
     },
 };
@@ -268,12 +270,40 @@ const availableWeapons = ["WEAPON_KNIFE", "WEAPON_HEAVYPISTOL"];
 const player_statistics = {};
 const AMOUNT_MINPLAYER_STARTTURF = 1;
 
+let spawnPlayer = function (player, delay) {
+    const team = player.getMeta("team");
+    if (!team) {
+        return;
+    }
+    
+    let spawnPos;
+    if (positions[team].temp_spawn) {
+        spawnPos = positions[team].temp_spawn;
+    } else {
+        const nextSpawns = positions[team].spawns;
+        spawnPos = nextSpawns[Math.round(Math.random() * (nextSpawns.length - 1))];
+    }
+    
+    player.spawn(spawnPos.x, spawnPos.y, spawnPos.z, delay);
+    giveWeapons(player);
+};
+let spawnCheckpoints = function () {
+    for (const team in checkpoints) {
+        if (checkpoints[team].vehicle) {
+            console.log(JSON.stringify(checkpoints[team].vehicle));
+            checkpoints[team].vehicle.destroy();
+        }
+    }
+    
+    for (let i in positions) {
+        let position_obj = positions[i].temp_spawn ? positions[i].temp_spawn : positions[i].vehicle;
+        checkpoints[i].vehicle = new alt.Checkpoint(45, position_obj.x, position_obj.y, position_obj.z - 1.1, 3, 1, colors[i].rgba.r, colors[i].rgba.g, colors[i].rgba.b, 255);
+    }
+};
 /**
  * Creating initial Checkpoints
  */
-for (let i in positions) {
-    checkpoints[i].vehicle = new alt.Checkpoint(45, positions[i].vehicle.x, positions[i].vehicle.y, positions[i].vehicle.z - 1.1, 5, 1, colors[i].rgba.r, colors[i].rgba.g, colors[i].rgba.b, 255);
-}
+spawnCheckpoints();
 
 /**
  * Filling weapon hashes
@@ -418,6 +448,11 @@ function sendStatisticsToDiscord() {
                         "value": player_stats_obj.amount_dmg_taken
                     },
                     {
+                        "name": "Kills:",
+                        "value": player_stats_obj.amount_kills
+                        
+                    },
+                    {
                         "name": "Deaths:",
                         "value": player_stats_obj.amount_deaths
                         
@@ -440,6 +475,22 @@ function sendStatisticsToDiscord() {
             'Content-Type': 'application/json'
         }
     });
+}
+
+function findPlayerByName(player_name) {
+    let allPlayers = alt.Player.all;
+    let players = allPlayers.filter((p) => p.valid && p.name === player_name);
+    
+    if (players.length === 1) {
+        return players[0];
+    } else {
+        for (const p of allPlayers) {
+            if (p.name.startsWith(player_name)) {
+                return p;
+            }
+        }
+    }
+    return null;
 }
 
 //<editor-fold defaultstate="collapsed" desc="-> Commands">
@@ -467,7 +518,6 @@ chat.registerCmd("kick", (player, args) => {
         chat.send(player, "{FF5733}You don`t have enough permissions to use this command!");
     }
 });
-
 chat.registerCmd("ban", (player, args) => {
     if (player.getMeta("admin")) {
         if (args.length > 0) {
@@ -503,6 +553,43 @@ chat.registerCmd("ban", (player, args) => {
         chat.send(player, "{FF5733}You don`t have enough permissions to use this command!");
     }
 });
+chat.registerCmd('setAdmin', (player, args) => {
+    if (!player.getMeta("admin")) {
+        chat.send(player, "{FF5733}You don`t have enough permissions to use this command!");
+        return;
+    }
+    if (!args.length) {
+        chat.send(player, "/setAdmin <player_name>");
+        return;
+    }
+    
+    let targetPlayer = findPlayerByName(args.join(" "));
+    if (targetPlayer) {
+        targetPlayer.setMeta('admin', true);
+    }
+});
+chat.registerCmd('sveh', (player, args) => {
+    if (!player.getMeta("admin")) {
+        chat.send(player, "{FF5733}You don`t have enough permissions to use this command!");
+        return;
+    }
+    
+    if (!args.length) {
+        chat.send(player, "/sveh <vehicle_name>");
+        return;
+    }
+    
+    let pos = player.pos;
+    new alt.Vehicle(args[0], pos.x + 2, pos.y, pos.z, 0, 0, 0);
+});
+chat.registerCmd('sgun', (player, args) => {
+    if (!player.getMeta("admin")) {
+        chat.send(player, "{FF5733}You don`t have enough permissions to use this command!");
+        return;
+    }
+    
+    player.giveWeapon(alt.hash(args[0]), 999, true);
+});
 
 chat.registerCmd('addTurf', (player, args) => {
     if (!player.getMeta("admin")) {
@@ -526,12 +613,36 @@ chat.registerCmd('stopTurf', (player, args) => {
     stopCapture();
 });
 chat.registerCmd('setTeamSpawn', (player, args) => {
-    if (args.length <= 0 || args[0] !== 'ms14') {
-        return; // -> /addTurf ms14
+    if (!player.getMeta("admin")) {
+        chat.send(player, "{FF5733}You don`t have enough permissions to use this command!");
+        return;
     }
     
-    //stopCapture();
+    let team = String(player.getMeta('team'));
+    if (team) {
+        positions[team].temp_spawn = {x: player.pos.x, y: player.pos.y, z: player.pos.z};
+        spawnCheckpoints();
+    }
 });
+chat.registerCmd('resetTeamSpawn', (player, args) => {
+    if (!player.getMeta("admin")) {
+        chat.send(player, "{FF5733}You don`t have enough permissions to use this command!");
+        return;
+    }
+    
+    let team = String(player.getMeta('team'));
+    if (team) {
+        positions[team].temp_spawn = null;
+        spawnCheckpoints();
+    }
+});
+chat.registerCmd('respawn', (player, args) => {
+    spawnPlayer(player);
+});
+chat.registerCmd('team', (player, args) => {
+    alt.emitClient(player, 'showTeamSelect', getTeamsPopulation());
+});
+
 //</editor-fold>
 
 //<editor-fold defaultstate="collapsed" desc="-> altV Server-Events">
@@ -553,7 +664,8 @@ alt.on("playerConnect", (player) => {
         amount_dmg_taken: 0,
         amount_dmg_given: 0,
         amount_shots_fired: 0,
-        amount_deaths: 0
+        amount_deaths: 0,
+        amount_kills: 0
     };
     
     broadcastPlayersOnline();
@@ -595,16 +707,11 @@ alt.onClient("teamSelected", (player, teamId) => {
     broadcastTeamsPopulation();
     
     chat.broadcast(`{5555AA}${player.name} {FFFFFF}joined {${colors[team].hex}}${team}`);
-    
     alt.log(player.name + " joined " + team);
-    const nextSpawns = positions[team].spawns;
     
-    const spawn = nextSpawns[Math.round(Math.random() * (nextSpawns.length - 1))];
-    console.log("Spawning in " + JSON.stringify(spawn));
     player.model = "mp_m_freemode_01";
-    player.spawn(spawn.x, spawn.y, spawn.z, 0);
-    giveWeapons(player);
     
+    spawnPlayer(player, 0);
     alt.emitClient(player, "applyAppearance", team);
     alt.emitClient(player, "updateTeam", team);
     
@@ -682,10 +789,11 @@ alt.on("playerDeath", (player, killer, weapon) => {
     
     // Fill Statistic
     player_statistics[player.name].amount_deaths += 1;
+    if (player !== killer) {
+        player_statistics[killer.name].amount_kills += 1;
+    }
     
-    const nextSpawns = positions[team].spawns;
-    const spawnPos = nextSpawns[Math.round(Math.random() * (nextSpawns.length - 1))];
-    player.spawn(spawnPos.x, spawnPos.y, spawnPos.z, 5000);
+    spawnPlayer(player, 5000);
     
     if (killer) {
         const killerTeam = killer.getMeta("team");
@@ -696,6 +804,8 @@ alt.on("playerDeath", (player, killer, weapon) => {
             victimGang: team,
             weapon: weaponName
         });
+        
+        /* Extra points for kill in Turf
         
         if (currentTurf != null && killer != player && team != killerTeam) {
             if (currentTurf.contains(player.pos.x, player.pos.y)) {
@@ -713,7 +823,9 @@ alt.on("playerDeath", (player, killer, weapon) => {
                     currentTurfPoints[killerTeam] = 0;
                 }
             }
-        }
+        }*/
+        
+        /* Team-Damage
         
         if (team == killerTeam && player != killer) {
             let warns = killer.getMeta("warns");
@@ -733,7 +845,7 @@ alt.on("playerDeath", (player, killer, weapon) => {
                 chat.broadcast(`{5555AA}${killer.name} {AA0000}warned [${warns + 1}/3] for vehicle kill`);
                 killer.setMeta("warns", warns + 1);
             }
-        }
+        }*/
     }
 });
 

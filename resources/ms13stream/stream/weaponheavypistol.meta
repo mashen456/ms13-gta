@@ -71,7 +71,7 @@
           <RecoilAccuracyToAllowHeadShotPlayer value="0.175000" />
           <MinHeadShotDistancePlayer value="5.000000" />
           <MaxHeadShotDistancePlayer value="40.000000" />
-          <HeadShotDamageModifierPlayer value="20.000000" />
+          <HeadShotDamageModifierPlayer value="1.000000" />
           <Damage value="40.000000" />
           <DamageTime value="0.000000" />
           <DamageTimeInVehicle value="0.000000" />
@@ -192,9 +192,9 @@
           <InitialRumbleIntensityFps value="1.000000" />
           <RumbleDurationFps value="95" />
           <RumbleIntensityFps value="1.000000" />
-          <NetworkPlayerDamageModifier value="0.100000" />
+          <NetworkPlayerDamageModifier value="0.400000" />
           <NetworkPedDamageModifier value="0.100000" />
-          <NetworkHeadShotPlayerDamageModifier value="0.100000" />
+          <NetworkHeadShotPlayerDamageModifier value="0.400000" />
           <LockOnRange value="55.000000" />
           <WeaponRange value="120.000000" />
           <BulletDirectionOffsetInDegrees value="0.000000" />

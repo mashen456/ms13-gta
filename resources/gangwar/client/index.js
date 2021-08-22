@@ -172,9 +172,11 @@ const teamColors = {
 
 let mainView = null;
 let viewLoaded = false;
+let viewOpened = false;
 
 function loadWebView() {
     mainView = new alt.WebView("http://resource/client/html/index.html");
+    
     mainView.on("viewLoaded", () => {
         alt.log("GangWar view loaded");
         alt.emitServer("viewLoaded");
@@ -185,6 +187,8 @@ function loadWebView() {
         alt.emitServer("teamSelected", teamId);
         alt.toggleGameControls(true);
         alt.showCursor(false);
+        
+        viewOpened = false;
     });
 }
 
@@ -282,11 +286,15 @@ alt.onServer("playerKill", (data) => {
 });
 
 alt.onServer("showTeamSelect", (teamsPopulation) => {
-    if (!viewLoaded) {
+    // If View is not loaded or alredy open
+    if (!viewLoaded || viewOpened) {
         return;
     }
+    
+    viewOpened = true;
     mainView.emit("showTeamSelect", teamsPopulation);
     mainView.focus();
+    
     alt.toggleGameControls(false);
     alt.showCursor(true);
 });
